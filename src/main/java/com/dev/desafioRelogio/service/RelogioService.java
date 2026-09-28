@@ -8,6 +8,7 @@ import com.dev.desafioRelogio.entity.Relogio;
 import com.dev.desafioRelogio.entity.enums.MaterialCaixa;
 import com.dev.desafioRelogio.entity.enums.TipoMovimento;
 import com.dev.desafioRelogio.entity.enums.TipoVidro;
+import com.dev.desafioRelogio.exception.NaoEncontradoException;
 import com.dev.desafioRelogio.mapper.RelogioMapper;
 import com.dev.desafioRelogio.repository.RelogioRepository;
 import jakarta.validation.Valid;
@@ -129,7 +130,7 @@ public class RelogioService {
 
     public void remover(UUID id) {
         if (!relogioRepository.existsById(id)) {
-            throw new NaoEncontradoException("Relógio não encontrado: " + id));
+            throw new NaoEncontradoException("Relógio não encontrado: " + id);
         }
         relogioRepository.deleteById(id);
     }
