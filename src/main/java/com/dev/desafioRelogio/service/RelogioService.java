@@ -1,5 +1,6 @@
 package com.dev.desafioRelogio.service;
 
+import com.dev.desafioRelogio.dto.AtualizarRelogioRequest;
 import com.dev.desafioRelogio.dto.CriarRelogioRequest;
 import com.dev.desafioRelogio.dto.PaginaRelogioDTO;
 import com.dev.desafioRelogio.dto.RelogioDTO;
@@ -9,6 +10,7 @@ import com.dev.desafioRelogio.entity.enums.TipoMovimento;
 import com.dev.desafioRelogio.entity.enums.TipoVidro;
 import com.dev.desafioRelogio.mapper.RelogioMapper;
 import com.dev.desafioRelogio.repository.RelogioRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +19,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.rmi.MarshalException;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -107,7 +108,7 @@ public class RelogioService {
         return mapper.toDto(relogioRepository.save(r));
     }
 
-    public RelogioDTO atualizar(UUID id, CriarRelogioRequest req) {
+    public RelogioDTO atualizar(UUID id, AtualizarRelogioRequest req) {
         Relogio r = relogioRepository.findById(id)
                 .orElseThrow(() -> new NaoEncontradoException("Relógio não encontrado: " + id));
         r.setMarca(req.marca());
